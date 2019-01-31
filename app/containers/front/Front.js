@@ -11,12 +11,10 @@ import Banner from "../components/banner/Banner";
 import Menus from "../components/menu/Menus";
 import NotFound from "../../components/notFound/NotFound";
 import {bindActionCreators} from 'redux'
-import {actions} from '../../reducers/adminManagerTags'
 import {actions as FrontActinos} from '../../reducers/frontReducer'
 import Login from "../home/components/login/Login";
 import {Logined} from "../home/components/logined/Logined";
 import {actions as IndexActions} from '../../reducers/index'
-const {get_all_tags} = actions;
 const {get_article_list} = FrontActinos;
 
 class Front extends Component{
@@ -55,7 +53,7 @@ class Front extends Component{
     }
 
     componentDidMount() {
-        this.props.get_all_tags();
+       
     }
 }
 
@@ -69,14 +67,11 @@ Front.propTypes = {
 
 function mapStateToProps(state) {
     return{
-        categories:state.admin.tags,
         userInfo: state.globalState.userInfo
     }
 }
 function mapDispatchToProps(dispatch) {
     return{
-        get_all_tags:bindActionCreators(get_all_tags,dispatch),
-        get_article_list:bindActionCreators(get_article_list,dispatch),
         login: bindActionCreators(IndexActions.get_login, dispatch),
         register: bindActionCreators(IndexActions.get_register, dispatch)
     }

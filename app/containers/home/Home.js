@@ -21,26 +21,7 @@ class Home extends Component {
         const {tags} = this.props;
         localStorage.setItem('userInfo', JSON.stringify(this.props.userInfo));
         return (
-            tags.length > 1 && this.props.match.params.tag && (tags.indexOf(this.props.match.params.tag) === -1 || this.props.location.pathname.lastIndexOf('\/') > 0)
-                ?
-                <Redirect to='/404'/>
-                :
-                <div className={style.container}>
-                    <ArticleList
-                        history={this.props.history}
-                        data={this.props.articleList}
-                        getArticleDetail={this.props.get_article_detail}
-                    />
-                    <div className={style.paginationContainer}>
-                        <Pagination
-                            defaultPageSize={5}
-                            onChange={(pageNum) => {
-                                this.props.get_article_list(this.props.match.params.tag || '', pageNum);
-                            }}
-                            current={this.props.pageNum}
-                            total={this.props.total}/>
-                    </div>
-                </div>
+            <div></div>
         )
     }
 
@@ -64,7 +45,6 @@ Home.propsTypes = {
 
 function mapStateToProps(state) {
     return {
-        tags: state.admin.tags,
         pageNum: state.front.pageNum,
         total: state.front.total,
         articleList: state.front.articleList
