@@ -13,9 +13,16 @@ import style from './style.css'
 import {bindActionCreators} from 'redux'
 import {actions} from '../../reducers/admin'
 import PureRenderMixin from 'react-addons-pure-render-mixin'
+import Currency from "../currency/Currency";
 import AdminManagerUser from "../adminManagerUser/AdminManagerUser";
 import AdminManagerUserGroup from "../AdminManagerUserGroup/AdminManagerUserGroup";
+import AdminNewArticle from "../adminNewArticle/AdminNewArticle";
+import NewCurrency from "../newCurrency/NewCurrency";
+import EditCurrency from "../editCurrency/EditCurrency";
 import AdminNewUserGroup from "../AdminNewUserGroup/AdminNewUserGroup";
+import AdminManagerTags from "../adminManagerTags/AdminManagerTags";
+import AdminManagerArticle from "../adminManagerArticle/AdminManagerArticle";
+import AdminManagerComment from "../adminManagerComment/AdminManagerComment";
 
 const {change_location_admin} = actions;
 
@@ -41,9 +48,16 @@ class Admin extends Component {
                                 <div className={style.contentContainer}>
                                     <Switch>
                                         <Route exact path={url} component={AdminIndex}/>
+										<Route path={`${url}/currency`} component={Currency}/>
                                         <Route path={`${url}/managerUser`} component={AdminManagerUser}/>
 										<Route path={`${url}/newUserGroup`} component={AdminNewUserGroup}/>
 										<Route path={`${url}/managerUserGroup`} component={AdminManagerUserGroup}/>
+                                        <Route path={`${url}/managerTags`} component={AdminManagerTags}/>
+                                        <Route path={`${url}/newArticle`} component={AdminNewArticle}/>
+										<Route path={`${url}/newCurrency`} component={NewCurrency}/>
+										<Route path={`${url}/editCurrency`} component={EditCurrency}/>
+                                        <Route path={`${url}/managerArticle`} component={AdminManagerArticle}/>
+                                        <Route path={`${url}/managerComment`} component={AdminManagerComment}/>
                                         <Route path={`${url}/detail`} component={Detail}/>
                                         <Route component={NotFound}/>
                                     </Switch>

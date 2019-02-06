@@ -1,7 +1,13 @@
 import {combineReducers} from 'redux'
 import {users} from './adminManagerUser'
 import {user_groups} from './adminManagerUserGroup'
+import {reducer as tags} from './adminManagerTags'
+import {reducer as newArticle} from "./adminManagerNewArticle";
+import {reducer as newCurrency} from "./newCurrency";
+import {reducer as editCurrency} from "./editCurrency";
 import {reducer as newUserGroup} from "./adminManagerNewUserGroup";
+import {articles} from './adminManagerArticle'
+import {currencies} from './currency'
 
 export const actionTypes = {
     ADMIN_URI_LOCATION:"ADMIN_URI_LOCATION"
@@ -35,7 +41,13 @@ const admin = combineReducers({
     adminGlobalState:reducer,
     users,
 	user_groups,
-	newUserGroup
+    tags,
+    newArticle,
+	newCurrency,
+	editCurrency,
+	newUserGroup,
+    articles,
+	currencies
 });
 
 export default admin
