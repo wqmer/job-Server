@@ -6,8 +6,8 @@ const initialState = {
 };
 
 export const actionTypes = {
-    'GET_ALL_POSTS':'GET_ALL_POSTS',
-	'RESPONSE_GET_ALL_POSTS': 'RESPONSE_GET_ALL_POSTS',
+    'GET_POSTS':'GET_POSTS',
+	'RESPONSE_GET_POSTS': 'RESPONSE_GET_POSTS',
 	'EDIT_POST': 'EDIT_POST',
 	'DELETE_POST':'DELETE_POST'
 };
@@ -15,7 +15,7 @@ export const actionTypes = {
 export const actions = {
     get_posts: function (pageNum=1) {
         return {
-            type: actionTypes.GET_ALL_POSTS,
+            type: actionTypes.GET_POSTS,
             pageNum:pageNum
         }
     },
@@ -35,7 +35,7 @@ export const actions = {
 
 export function posts(state = initialState, action) {
     switch (action.type) {
-        case actionTypes.RESPONSE_GET_ALL_POSTS:
+        case actionTypes.RESPONSE_GET_POSTS:
             return {
                 ...state, 
 				postList: [...action.data.list], 

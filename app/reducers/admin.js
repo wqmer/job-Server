@@ -8,6 +8,7 @@ import {reducer as editCurrency} from "./editCurrency";
 import {reducer as newUserGroup} from "./adminManagerNewUserGroup";
 import {articles} from './adminManagerArticle'
 import {currencies} from './currency'
+import {posts} from './post'
 
 export const actionTypes = {
     ADMIN_URI_LOCATION:"ADMIN_URI_LOCATION"
@@ -47,7 +48,8 @@ const admin = combineReducers({
 	editCurrency,
 	newUserGroup,
     articles,
-	currencies
+	currencies,
+	posts,
 });
 
 export default admin

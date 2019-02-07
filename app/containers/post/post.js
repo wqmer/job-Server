@@ -4,11 +4,11 @@ import {bindActionCreators} from 'redux'
 import {connect} from 'react-redux'
 import {actions} from '../../reducers/post'
 import {Table, Pagination} from 'antd';
-import { Divider, Tag } from 'antd';
+import {Divider, Tag} from 'antd';
 import {Button} from 'antd'
 
-import style from './style.css'
 import {PostCell} from './components/postCell';
+import style from './style.css'
 
 const {get_posts, edit_post, delete_post} = actions;
 
@@ -38,10 +38,10 @@ class Post extends Component {
 			width: 150,
 			render: (text, record) => (	
 				 <PostCell
-					edit_post={(id)=>this.props.edit_post(record._id)}
+					editPost={(id)=>this.props.editPost(record._id)}
 					history={this.props.history}
-					getPostDetail={(id)=>this.props.get_post_detail(record.id)}
-					delete_post={(id)=>this.props.delete_post(id)}
+					getPostDetail={(id)=>this.props.getPostDetail(record.id)}
+					deletePost={(id)=>this.props.deletePost(id)}
 					data={record} />
 			)
 		}];
@@ -55,8 +55,7 @@ class Post extends Component {
     }
 
     componentDidMount() {
-        //缓存
-        if(this.props.postList.length===0)
+        if(this.props.postList.length === 0)
             this.props.get_posts();
     }
 }
@@ -85,9 +84,9 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
     return {
-        get_posts: bindActionCreators(get_posts, dispatch),
-		edit_post:bindActionCreators(edit_post,dispatch),
-		delete_post:bindActionCreators(delete_post,dispatch),
+        getPosts: bindActionCreators(get_posts, dispatch),
+		editPost:bindActionCreators(edit_post,dispatch),
+		deletePost:bindActionCreators(delete_post,dispatch),
     }
 }
 
