@@ -2,12 +2,13 @@ import React, {Component, PropTypes} from 'react'
 import PureRenderMixin from 'react-addons-pure-render-mixin'
 import {bindActionCreators} from 'redux'
 import {connect} from 'react-redux'
-import {actions} from '../../reducers/post'
+import {actions} from '../../../reducers/post'
 import {Table, Pagination} from 'antd';
 import {Divider, Tag} from 'antd';
+import {Row, Col} from 'antd';
 import {Button} from 'antd'
 
-import {PostCell} from './components/postCell';
+import {PostCell} from './component/postCell';
 import style from './style.css'
 
 const {get_posts, edit_post, delete_post} = actions;
@@ -21,42 +22,56 @@ class Post extends Component {
 
     render() {
 		const columns = [{
-			title:'代码',
-			dataIndex:'code',
-			key:'code',
+			title:'标题',
+			dataIndex:'title',
+			key:'title',
 			width: 100
 		}, 
 		{
-			title:'值',
-			dataIndex:'value',
-			key:'value',
+			title:'作者',
+			dataIndex:'author',
+			key:'author',
 			width: 100
 		}, 
+		{
+			title:'添加时间',
+			dataIndex:'date_added',
+			key:'date_added',
+			width: 100
+		}, 
+		{
+			title:'阅读量',
+			dataIndex:'view_count',
+			key:'view_count',
+			width: 100
+		},  
 		{
 			title: '操作',
 			key: 'action',
 			width: 150,
 			render: (text, record) => (	
-				 <PostCell
+				<PostCell
 					editPost={(id)=>this.props.editPost(record._id)}
 					history={this.props.history}
 					getPostDetail={(id)=>this.props.getPostDetail(record.id)}
-					deletePost={(id)=>this.props.deletePost(id)}
 					data={record} />
 			)
 		}];
 
         return (	
             <div>
-				<h2 className={style.title}>货币管理</h2>
-				<Table columns={columns} dataSource={this.props.postList} />
+			  <Row className={style.titleRow}>
+			    <Col span={12}><h2>发布管理</h2></Col>
+			    <Col span={12}><Button type="primary" icon="plus" className={style.btnAdd} onClick={()=>{this.props.history.push('/admin/post_add')}}/></Col>
+			  </Row>
+			  <Table columns={columns} dataSource={this.props.postList} />
             </div>
         )
     }
 
     componentDidMount() {
         if(this.props.postList.length === 0)
-            this.props.get_posts();
+            this.props.getPosts();
     }
 }
 
@@ -69,7 +84,7 @@ Post.propsTypes = {
 Post.defaultProps = {
     pageNum: 1,
     postList: [],
-    total:0
+    total: 0
 };
 
 function mapStateToProps(state) {

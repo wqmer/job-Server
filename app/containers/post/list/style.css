@@ -1,3 +1,6 @@
-.title {
-	margin-bottom: 8px;
+.titleRow {
+	margin-bottom: 20px;
+}
+.btnAdd {
+	float: right;
 }

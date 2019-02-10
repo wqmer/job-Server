@@ -14,7 +14,8 @@ import {bindActionCreators} from 'redux'
 import {actions} from '../../reducers/admin'
 import PureRenderMixin from 'react-addons-pure-render-mixin'
 import Currency from "../currency/Currency";
-import Post from "../post/Post";
+import Post from "../post/list/Post";
+import PostAdd from "../post/add/PostAdd";
 import AdminManagerUser from "../adminManagerUser/AdminManagerUser";
 import AdminManagerUserGroup from "../AdminManagerUserGroup/AdminManagerUserGroup";
 import AdminNewArticle from "../adminNewArticle/AdminNewArticle";
@@ -51,6 +52,7 @@ class Admin extends Component {
                                         <Route exact path={url} component={AdminIndex}/>
 										<Route path={`${url}/currency`} component={Currency}/>
 										<Route path={`${url}/post`} component={Post}/>
+										<Route path={`${url}/post_add`} component={PostAdd}/>
                                         <Route path={`${url}/managerUser`} component={AdminManagerUser}/>
 										<Route path={`${url}/newUserGroup`} component={AdminNewUserGroup}/>
 										<Route path={`${url}/managerUserGroup`} component={AdminManagerUserGroup}/>
