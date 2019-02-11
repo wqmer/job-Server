@@ -42,7 +42,7 @@ export const actions = {
     },
 	add_post:function (data) {
         return{
-            type:actionTypes.SAVE_CURRENCY,
+            type:actionTypes.ADD_POST,
             data
         }
     }

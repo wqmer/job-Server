@@ -2,6 +2,7 @@ import {take,call,put,select} from 'redux-saga/effects'
 import {get, post} from '../fetch/fetch'
 import {actionsTypes as IndexActionTypes} from '../reducers'
 import {actionTypes as PostTypes} from '../reducers/Post'
+import {actionTypes as PostAddTypes} from '../reducers/PostAdd'
 import {actionTypes as EditPostTypes} from '../reducers/edit_post'
 
 export function* getPostList(pageNum) {
@@ -31,6 +32,49 @@ export function* getPostListFlow() {
                 }, 1000);
             } else {
                 yield put({type: IndexActionTypes.SET_MESSAGE, msgContent: res.message, msgType: 0});
+            }
+        }
+    }
+}
+
+export function* addPost(data) {
+    yield put({type: IndexActionTypes.FETCH_START});
+    try {
+        return yield call(post, '/admin/post/add_post', data);
+    } catch (err) {
+        yield put({type: IndexActionTypes.SET_MESSAGE, msgContent: '网络请求错误', msgType: 0});
+    } finally {
+        yield put({type: IndexActionTypes.FETCH_END})
+    }
+}
+
+export function* addPostFlow() {
+    while (true) {
+        let request = yield take(PostAddTypes.ADD_POST);
+        if (request.data.title === "") {
+            yield put({type: IndexActionTypes.SET_MESSAGE, msgContent: '请输入发布标题', msgType: 0});
+        } else if (request.data.author === "") {
+            yield put({type: IndexActionTypes.SET_MESSAGE, msgContent: '请输入发布作者', msgType: 0});
+        } else if (request.data.date_added === "") {
+            yield put({type: IndexActionTypes.SET_MESSAGE, msgContent: '请输入发布时间', msgType: 0});
+        } else if (request.data.view_count === "") {
+            yield put({type: IndexActionTypes.SET_MESSAGE, msgContent: '请输入发布阅读数量', msgType: 0});
+        } else {
+            let res = yield call(addPost, request.data);
+            if (res) {
+                if (res.code === 0) {
+                    yield put({type: IndexActionTypes.SET_MESSAGE, msgContent: res.message, msgType: 1});
+                    setTimeout(function () {
+                        location.replace('/admin/post');
+                    }, 1000);
+                } else if (res.message === '身份信息已过期，请重新登录') {
+                    yield put({type: IndexActionTypes.SET_MESSAGE, msgContent: res.message, msgType: 0});
+                    setTimeout(function () {
+                        location.replace('/');
+                    }, 1000);
+                } else {
+                    yield put({type: IndexActionTypes.SET_MESSAGE, msgContent: res.message, msgType: 0});
+                }
             }
         }
     }

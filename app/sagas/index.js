@@ -6,15 +6,19 @@ import {getAllTagsFlow, addTagFlow, delTagFlow} from './adminManagerTagsSaga'
 import {saveArticleFlow} from './adminManagerNewArticleSaga'
 import {saveCurrencyFlow} from './NewCurrencySaga'
 import {updateCurrencyFlow} from './EditCurrencySaga'
+import {getPostListFlow, addPostFlow} from './PostSaga'
 import {saveUserGroupFlow} from './adminManagerNewUserGroupSaga'
 import {getArticleListFlow,deleteArticleFlow,editArticleFlow} from './adminManagerArticleSaga'
 import {getCurrencyListFlow, editCurrencyFlow, deleteCurrencyFlow} from './currencySaga'
 import {getArticlesListFlow,getArticleDetailFlow} from './frontSaga'
 
 export default function* rootSaga() {
-    yield  fork(loginFlow);
-    yield  fork(registerFlow);
-    yield  fork(user_auth);
+	yield fork(getPostListFlow);
+	yield fork(addPostFlow);
+	
+    yield fork(loginFlow);
+    yield fork(registerFlow);
+    yield fork(user_auth);
     yield fork(get_all_users_flow);
 	yield fork(get_all_user_groups_flow);
     yield fork(getAllTagsFlow);

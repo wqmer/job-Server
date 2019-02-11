@@ -3,6 +3,7 @@ import {Menu, Icon} from 'antd'
 
 const menus = [
     {url: '/', name: '首页', iconType: 'home'},
+	{url: '/post', name: '发布管理', iconType: 'appstore'},
 	{url: '/currency', name: '货币', iconType: 'file-text'},
     {url: '/managerUser', name: '用户管理', iconType: 'user-add'},
 	{url: '/managerUserGroup', name: '用户组管理', iconType: 'usergroup-add'},
