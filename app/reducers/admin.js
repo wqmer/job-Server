@@ -9,7 +9,7 @@ import {reducer as newUserGroup} from "./adminManagerNewUserGroup";
 import {articles} from './adminManagerArticle'
 import {currencies} from './currency'
 import {posts} from './post';
-import {reducer as postAdd} from "./newCurrency";
+import {reducer as postAdd} from "./postAdd";
 
 export const actionTypes = {
     ADMIN_URI_LOCATION:"ADMIN_URI_LOCATION"

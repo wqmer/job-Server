@@ -35,20 +35,20 @@ class Post extends Component {
 		}, 
 		{
 			title:'添加时间',
-			dataIndex:'date_added',
-			key:'date_added',
+			dataIndex:'dateAdded',
+			key:'dateAdded',
 			width: 100
 		}, 
 		{
 			title:'阅读量',
-			dataIndex:'view_count',
-			key:'view_count',
+			dataIndex:'viewCount',
+			key:'viewCount',
 			width: 100
 		},  
 		{
 			title: '操作',
 			key: 'action',
-			width: 150,
+			width: 100,
 			render: (text, record) => (	
 				<PostCell
 					editPost={(id)=>this.props.editPost(record._id)}

@@ -2,8 +2,10 @@
 import mongoose from 'mongoose'
 
 module.exports = new mongoose.Schema({
-    code:String,
-    value:Number
+    title:String,
+    author:String,
+	dateAdded:String,
+    viewCount:Number
 });
 
 

@@ -3,13 +3,13 @@ import {get, post} from '../fetch/fetch'
 import {actionsTypes as IndexActionTypes} from '../reducers'
 import {actionTypes as PostTypes} from '../reducers/Post'
 import {actionTypes as PostAddTypes} from '../reducers/PostAdd'
-import {actionTypes as EditPostTypes} from '../reducers/edit_post'
+import {actionTypes as EditPostTypes} from '../reducers/PostEdit'
 
 export function* getPostList(pageNum) {
     yield put({type: IndexActionTypes.FETCH_START});
 	
     try {
-        return yield call(get, `/admin/post/get_posts?pageNum=${pageNum}&isPublish=false`);
+        return yield call(get, `/admin/post/get_posts?pageNum=${pageNum}`);
     } catch (err) {
         yield put({type: IndexActionTypes.SET_MESSAGE, msgContent: '网络请求错误', msgType: 0});
     } finally {
@@ -51,13 +51,13 @@ export function* addPost(data) {
 export function* addPostFlow() {
     while (true) {
         let request = yield take(PostAddTypes.ADD_POST);
-        if (request.data.title === "") {
+        if (request.data.title === '') {
             yield put({type: IndexActionTypes.SET_MESSAGE, msgContent: '请输入发布标题', msgType: 0});
-        } else if (request.data.author === "") {
+        } else if (request.data.author === '') {
             yield put({type: IndexActionTypes.SET_MESSAGE, msgContent: '请输入发布作者', msgType: 0});
-        } else if (request.data.date_added === "") {
+        } else if (request.data.date_added === '') {
             yield put({type: IndexActionTypes.SET_MESSAGE, msgContent: '请输入发布时间', msgType: 0});
-        } else if (request.data.view_count === "") {
+        } else if (request.data.view_count === '') {
             yield put({type: IndexActionTypes.SET_MESSAGE, msgContent: '请输入发布阅读数量', msgType: 0});
         } else {
             let res = yield call(addPost, request.data);

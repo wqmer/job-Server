@@ -22,6 +22,8 @@ router.use('/article',require('./article'));
 
 router.use('/currency',require('./currency'));
 
+router.use('/post',require('./post'));
+
 router.use('/usergroup',require('./userGroup'));
 
 router.get('/getUsers',(req,res)=>{

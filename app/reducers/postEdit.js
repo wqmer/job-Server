@@ -1,17 +1,17 @@
 
 const initialState={
-    title:'',
+	title:'',
     author:'',
-	dateAdded:'',
-    viewCount: 0
+	date_added:'',
+    view_count: 0,
+	id:''
 };
-
 export const actionTypes = {
     UPDATING_TITLE:'UPDATING_TITLE',
     UPDATING_AUTHOR:'UPDATING_AUTHOR',
     UPDATING_DATE_ADDED:'UPDATING_DATE_ADDED',
     UPDATING_VIEW_COUNT:'UPDATING_VIEW_COUNT',
-	ADD_POST:'ADD_POST'
+	EDIT_POST:'EDIT_POST'
 };
 
 export const actions = {
@@ -27,16 +27,16 @@ export const actions = {
             author
         }
     },
-	update_date_added:function (dateAdded) {
+	update_date_added:function (date_added) {
         return{
             type:actionTypes.UPDATING_DATE_ADDED,
-            dateAdded
+            date_added
         }
     },
-	update_view_count:function (viewCount) {
+	update_view_count:function (view_count) {
         return{
             type:actionTypes.UPDATING_VIEW_COUNT,
-            viewCount
+            view_count
         }
     },
 	add_post:function (data) {
@@ -51,19 +51,19 @@ export function reducer(state = initialState, action) {
     switch (action.type){
         case actionTypes.UPDATING_TITLE:
             return{
-                ...state,title:action.title
+                ...state,code:action.title
             };
         case actionTypes.UPDATING_AUTHOR:
             return{
-                ...state,author:action.author
+                ...state,value:action.author
             };
 		case actionTypes.UPDATING_DATE_ADDED:
             return{
-                ...state,dateAdded:action.dateAdded
+                ...state,value:action.date_added
             };
 		case actionTypes.UPDATING_VIEW_COUNT:
             return{
-                ...state,viewCount:action.viewCount
+                ...state,value:action.view_count
             };	
 		
         default:

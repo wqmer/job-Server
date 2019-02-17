@@ -18,19 +18,19 @@ class PostAdd extends Component {
     }
 
     titleOnChange(e) {
-        this.props.update_title(e.target.value)
+        this.props.updateTitle(e.target.value)
     };
 	
 	authorOnChange(e) {
-        this.props.update_author(e.target.value)
+        this.props.updateAuthor(e.target.value)
     };
 	
 	dateAddedOnChange(e) {
-        this.props.update_date_added(e.target.value)
+        this.props.updateDateAdded(e.target.value)
     };
 	
 	viewCountOnChange(e) {
-        this.props.update_view_count(e.target.value)
+        this.props.updateViewCount(e.target.value)
     };
 
     addPost() {
