@@ -11,7 +11,7 @@ import {Button} from 'antd'
 import {PostCell} from './component/postCell';
 import style from './style.css'
 
-const {get_posts, edit_post, delete_post} = actions;
+const {get_posts, get_post, delete_post} = actions;
 
 class Post extends Component {
 
@@ -51,9 +51,9 @@ class Post extends Component {
 			width: 100,
 			render: (text, record) => (	
 				<PostCell
-					editPost={(id)=>this.props.editPost(record._id)}
+					getPost={(id)=>this.props.getPost(record._id)}		
+					deletePost={(id)=>this.props.deletePost(record._id)}					
 					history={this.props.history}
-					getPostDetail={(id)=>this.props.getPostDetail(record.id)}
 					data={record} />
 			)
 		}];
@@ -100,8 +100,8 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
     return {
         getPosts: bindActionCreators(get_posts, dispatch),
-		editPost:bindActionCreators(edit_post,dispatch),
-		deletePost:bindActionCreators(delete_post,dispatch),
+		getPost: bindActionCreators(get_post, dispatch),
+		deletePost: bindActionCreators(delete_post, dispatch),
     }
 }
 

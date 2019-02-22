@@ -7,8 +7,8 @@ const initialState = {
 
 export const actionTypes = {
     'GET_POSTS':'GET_POSTS',
-	'RESPONSE_GET_POSTS': 'RESPONSE_GET_POSTS',
-	'EDIT_POST': 'EDIT_POST',
+	'RESPONSE_GET_POSTS':'RESPONSE_GET_POSTS',
+	'GET_POST':'GET_POST',
 	'DELETE_POST':'DELETE_POST'
 };
 
@@ -19,9 +19,9 @@ export const actions = {
             pageNum:pageNum
         }
     },
-	edit_post: function (id) {
+	get_post: function (id) {
         return {
-            type: actionTypes.EDIT_POST,
+            type: actionTypes.GET_POST,
             id
         }
     },
@@ -40,7 +40,7 @@ export function posts(state = initialState, action) {
                 ...state, 
 				postList: [...action.data.list], 
 				total: action.data.total,
-				pageNum:action.data.pageNum
+				pageNum: action.data.pageNum
             };
         default:
             return state;

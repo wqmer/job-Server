@@ -31,6 +31,14 @@ router.get('/get_posts', function (req, res) {
     });
 });
 
+router.get('/get_post', (req, res) => {
+    let _id = req.query.id;
+	
+	Post.findOne({_id}).then(data=>{
+		responseClient(res,200,0,'success',data);
+	}); 
+});
+
 router.post('/add_post', function (req, res) {
     const {
         title,
@@ -59,7 +67,7 @@ router.post('/update_post',(req,res)=>{
 		id,
         title,
         author,
-		date_added,
+		dateAdded,
         viewCount
     } = req.body;
 	
@@ -73,14 +81,14 @@ router.post('/update_post',(req,res)=>{
     });
 });
 
-router.get('/delete_post',(req,res)=>{
+router.get('/delete_post',(req, res)=>{
     let id = req.query.id;
-    Post.remove({_id:id})
+    Post.remove({_id: id})
         .then(result=>{
             if(result.result.n === 1){
                 responseClient(res,200,0,'删除成功!')
             }else{
-                responseClient(res,200,1,'文章不存在');
+                responseClient(res,200,1,'发布不存在');
             }
         }).cancel(err=>{
             responseClient(res);

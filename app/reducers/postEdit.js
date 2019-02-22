@@ -1,69 +1,75 @@
 
 const initialState={
+	id:'',
 	title:'',
     author:'',
-	date_added:'',
-    view_count: 0,
-	id:''
+	dateAdded:'',
+    viewCount: 0
 };
+
 export const actionTypes = {
-    UPDATING_TITLE:'UPDATING_TITLE',
-    UPDATING_AUTHOR:'UPDATING_AUTHOR',
-    UPDATING_DATE_ADDED:'UPDATING_DATE_ADDED',
-    UPDATING_VIEW_COUNT:'UPDATING_VIEW_COUNT',
-	EDIT_POST:'EDIT_POST'
+	SET_POST_ID:'SET_POST_ID',
+    EDITING_TITLE:'EDITING_TITLE',
+    EDITING_AUTHOR:'EDITING_AUTHOR',
+    EDITING_DATE_ADDED:'EDITING_DATE_ADDED',
+    EDITING_VIEW_COUNT:'EDITING_VIEW_COUNT',
+	UPDATE_POST:'UPDATE_POST'
 };
 
 export const actions = {
-    update_title:function (title) {
+    edit_title:function (title) {
         return{
-            type:actionTypes.UPDATING_TITLE,
+            type:actionTypes.EDITING_TITLE,
             title
         }
     },
-    update_author:function (author) {
+    edit_author:function (author) {
         return{
-            type:actionTypes.UPDATING_AUTHOR,
+            type:actionTypes.EDITING_AUTHOR,
             author
         }
     },
-	update_date_added:function (date_added) {
+	edit_date_added:function (dateAdded) {
         return{
-            type:actionTypes.UPDATING_DATE_ADDED,
-            date_added
+            type:actionTypes.EDITING_DATE_ADDED,
+            dateAdded
         }
     },
-	update_view_count:function (view_count) {
+	edit_view_count:function (viewCount) {
         return{
-            type:actionTypes.UPDATING_VIEW_COUNT,
-            view_count
+            type:actionTypes.EDITING_VIEW_COUNT,
+            viewCount
         }
     },
-	add_post:function (data) {
+	update_post:function (data) {
         return{
-            type:actionTypes.ADD_POST,
+            type:actionTypes.UPDATE_POST,
             data
         }
     }
 };
 
-export function reducer(state = initialState, action) {
-    switch (action.type){
-        case actionTypes.UPDATING_TITLE:
+export function reducer(state = initialState, action) {	
+    switch (action.type) {
+		case actionTypes.SET_POST_ID:
             return{
-                ...state,code:action.title
+                ...state,id:action.id
+            };	
+        case actionTypes.EDITING_TITLE:
+            return{
+                ...state,title:action.title
             };
-        case actionTypes.UPDATING_AUTHOR:
+        case actionTypes.EDITING_AUTHOR:
             return{
-                ...state,value:action.author
+                ...state,author:action.author
             };
-		case actionTypes.UPDATING_DATE_ADDED:
+		case actionTypes.EDITING_DATE_ADDED:
             return{
-                ...state,value:action.date_added
+                ...state,dateAdded:action.dateAdded
             };
-		case actionTypes.UPDATING_VIEW_COUNT:
+		case actionTypes.EDITING_VIEW_COUNT:
             return{
-                ...state,value:action.view_count
+                ...state,viewCount:action.viewCount
             };	
 		
         default:
