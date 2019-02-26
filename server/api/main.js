@@ -1,6 +1,5 @@
 import Express from 'express'
 import Tags from '../../models/tags'
-import Currency from '../../models/currency'
 import Article from '../../models/article'
 import UserGroup from '../../models/usergroup'
 import {responseClient} from '../util'
@@ -69,17 +68,6 @@ router.get('/getArticleDetail', (req, res) => {
        }).cancel(err => {
        responseClient(res);
    });
-});
-
-//获取文章详情
-router.get('/getCurrencyDetail', (req, res) => {
-    let _id = req.query.id;
-	Currency.findOne({_id})
-		.then(data=>{
-		    responseClient(res,200,0,'success',data);
-	   }).cancel(err => {
-	   responseClient(res);
-	});
 });
 
 //获取文章详情

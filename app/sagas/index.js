@@ -4,12 +4,10 @@ import {get_all_users_flow} from './adminManagerUsersSaga'
 import {get_all_user_groups_flow, editUserGroupFlow} from './adminManagerUserGroupSaga'
 import {getAllTagsFlow, addTagFlow, delTagFlow} from './adminManagerTagsSaga'
 import {saveArticleFlow} from './adminManagerNewArticleSaga'
-import {saveCurrencyFlow} from './NewCurrencySaga'
-import {updateCurrencyFlow} from './EditCurrencySaga'
 import {getPostListFlow, addPostFlow, updatePostFlow, getPostFlow, deletePostFlow} from './PostSaga'
+import {getCustomerListFlow, addCustomerFlow, updateCustomerFlow, getCustomerFlow, deleteCustomerFlow} from './CustomerSaga'
 import {saveUserGroupFlow} from './adminManagerNewUserGroupSaga'
 import {getArticleListFlow,deleteArticleFlow,editArticleFlow} from './adminManagerArticleSaga'
-import {getCurrencyListFlow, editCurrencyFlow, deleteCurrencyFlow} from './currencySaga'
 import {getArticlesListFlow,getArticleDetailFlow} from './frontSaga'
 
 export default function* rootSaga() {
@@ -18,6 +16,12 @@ export default function* rootSaga() {
 	yield fork(updatePostFlow);
 	yield fork(getPostFlow);
 	yield fork(deletePostFlow);
+	
+	yield fork(getCustomerListFlow);
+	yield fork(addCustomerFlow);
+	yield fork(updateCustomerFlow);
+	yield fork(getCustomerFlow);
+	yield fork(deleteCustomerFlow);
 
     yield fork(loginFlow);
     yield fork(registerFlow);
@@ -28,12 +32,7 @@ export default function* rootSaga() {
     yield fork(addTagFlow);
     yield fork(delTagFlow);
 	yield fork(saveArticleFlow);
-	yield fork(saveCurrencyFlow);
-    yield fork(getCurrencyListFlow);
-	yield fork(editCurrencyFlow);
-	yield fork(deleteCurrencyFlow);
 	yield fork(saveUserGroupFlow);
-	yield fork(updateCurrencyFlow);
     yield fork(getArticleListFlow);
     yield fork(deleteArticleFlow);
     yield fork(getArticlesListFlow);

@@ -6,7 +6,7 @@ import style from './style.css'
 import remark from 'remark'
 import reactRenderer from 'remark-react'
 import {Input, Select, Button, Modal} from 'antd';
-import {actions} from '../../../reducers/customerEdit';
+import {actions} from '../../../reducers/customer/customerEdit';
 import dateFormat from 'dateformat'
 
 const {edit_name, edit_description, update_customer} = actions;
@@ -52,7 +52,7 @@ class CustomerEdit extends Component {
                         placeholder={'请输入描述'}
                         type='text'
                         value={this.props.description}
-                        onChange={this.authorOnChange.bind(this)} />
+                        onChange={this.descriptionOnChange.bind(this)} />
                     <div className={style.bottomContainer}>
                         <Button type='primary' onClick={this.updateCustomer.bind(this)} className={style.buttonStyle}>保存</Button>
                     </div>
@@ -64,7 +64,7 @@ class CustomerEdit extends Component {
     componentDidMount() {}
 }
 
-CustomerAdd.propsTypes = {
+CustomerEdit.propsTypes = {
     name: PropTypes.string,
     description: PropTypes.string
 };
@@ -89,6 +89,7 @@ function mapDispatchToProps(dispatch) {
     return {
         editName: bindActionCreators(edit_name, dispatch),
         editDescription: bindActionCreators(edit_description, dispatch),
+		updateCustomer: bindActionCreators(update_customer, dispatch)
     }
 }
 

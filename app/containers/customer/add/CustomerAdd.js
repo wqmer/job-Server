@@ -5,7 +5,7 @@ import {connect} from 'react-redux'
 import remark from 'remark'
 import reactRenderer from 'remark-react'
 import {Input, Select, Button, Modal} from 'antd';
-import {actions} from '../../../reducers/customerAdd';
+import {actions} from '../../../reducers/customer/customerAdd';
 import dateFormat from 'dateformat'
 import style from './style.css'
 
@@ -39,21 +39,21 @@ class CustomerAdd extends Component {
                 <div className={style.container}>
                     <span className={style.subTitle}>名字</span>
                     <Input
-                        className={style.nameInput}
+                        className={style.titleInput}
                         placeholder={'请输入名字'}
                         type='text'
                         value={this.props.name}
                         onChange={this.nameOnChange.bind(this)} />
 					<span className={style.subTitle}>描述</span>
                     <Input
-                        className={style.nameInput}
+                        className={style.titleInput}
                         placeholder={'请输入描述'}
                         type='text'
                         value={this.props.description}
                         onChange={this.descriptionOnChange.bind(this)} />
 					<span className={style.subTitle}>添加日期</span>
                     <div className={style.bottomContainer}>
-                        <Button type='primary' onClick={this.addCustomer.bind(this)}className={style.buttonStyle}>添加</Button>
+                        <Button type='primary' onClick={this.addCustomer.bind(this)} className={style.buttonStyle}>添加</Button>
                     </div>
                 </div>
             </div>

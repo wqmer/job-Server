@@ -1,10 +1,10 @@
 import Express from 'express'
-import Currency from '../../models/currency'
+import Customer from '../../models/customer'
 import {MD5_SUFFIX,responseClient,md5} from '../util'
 
 const router = Express.Router();
 
-router.get('/get_currencies', function (req, res) {
+router.get('/get_customers', function (req, res) {
 	let searchCondition = {};
 	
     let skip = (req.query.pageNum - 1) < 0 ? 0 : (req.query.pageNum - 1) * 5;
@@ -13,10 +13,10 @@ router.get('/get_currencies', function (req, res) {
         list: []
     };
 	
-    Currency.count(searchCondition)
+    Customer.count(searchCondition)
         .then(count => {
             responseData.total = count;
-            Currency.find(searchCondition, '_id code value', {
+            Customer.find(searchCondition, '_id name description', {
                 skip: skip,
                 limit: 5
             })
@@ -31,18 +31,26 @@ router.get('/get_currencies', function (req, res) {
     });
 });
 
-router.post('/add_currency', function (req, res) {
+router.get('/get_customer', (req, res) => {
+    let _id = req.query.id;
+	
+	Customer.findOne({_id}).then(data=>{
+		responseClient(res,200,0,'success',data);
+	}); 
+});
+
+router.post('/add_customer', function (req, res) {
     const {
-        code,
-        value
+        name,
+        description
     } = req.body;
 	
-    let tempCurrency = new Currency({
-        code,
-        value
+    let tempCustomer = new Customer({
+		name,
+        description
     });
 	
-    tempCurrency.save().then(data=>{
+    tempCustomer.save().then(data=>{
         responseClient(res,200,0,'保存成功',data)
     }).cancel(err=>{
         console.log(err);
@@ -50,14 +58,14 @@ router.post('/add_currency', function (req, res) {
     });
 });
 
-router.post('/update_currency',(req,res)=>{
+router.post('/update_customer',(req,res)=>{
     const {
 		id,
-        code,
-        value
+        name,
+        description
     } = req.body;
 	
-    Currency.update({_id:id},{code, value})
+    Customer.update({_id:id},{name, description})
         .then(result=>{
             console.log(result);
             responseClient(res,200,0,'更新成功',result)
@@ -67,14 +75,14 @@ router.post('/update_currency',(req,res)=>{
     });
 });
 
-router.get('/delete_currency',(req,res)=>{
+router.get('/delete_customer',(req, res)=>{
     let id = req.query.id;
-    Currency.remove({_id:id})
+    Customer.remove({_id: id})
         .then(result=>{
             if(result.result.n === 1){
                 responseClient(res,200,0,'删除成功!')
             }else{
-                responseClient(res,200,1,'文章不存在');
+                responseClient(res,200,1,'发布不存在');
             }
         }).cancel(err=>{
             responseClient(res);

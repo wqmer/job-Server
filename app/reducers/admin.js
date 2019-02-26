@@ -3,14 +3,14 @@ import {users} from './adminManagerUser'
 import {user_groups} from './adminManagerUserGroup'
 import {reducer as tags} from './adminManagerTags'
 import {reducer as newArticle} from "./adminManagerNewArticle";
-import {reducer as newCurrency} from "./newCurrency";
-import {reducer as editCurrency} from "./editCurrency";
 import {reducer as newUserGroup} from "./adminManagerNewUserGroup";
 import {articles} from './adminManagerArticle'
-import {currencies} from './currency'
 import {posts} from './post';
 import {reducer as postAdd} from "./postAdd";
 import {reducer as postEdit} from "./postEdit";
+import {customers} from './customer/customer';
+import {reducer as customerAdd} from "./customer/customerAdd";
+import {reducer as customerEdit} from "./customer/customerEdit";
 
 export const actionTypes = {
     ADMIN_URI_LOCATION:"ADMIN_URI_LOCATION"
@@ -46,14 +46,14 @@ const admin = combineReducers({
 	user_groups,
     tags,
     newArticle,
-	newCurrency,
-	editCurrency,
 	newUserGroup,
     articles,
-	currencies,
 	posts,
 	postAdd,
-	postEdit
+	postEdit,
+	customers,
+	customerAdd,
+	customerEdit
 });
 
 export default admin

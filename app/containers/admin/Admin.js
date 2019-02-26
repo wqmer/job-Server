@@ -13,15 +13,15 @@ import style from './style.css'
 import {bindActionCreators} from 'redux'
 import {actions} from '../../reducers/admin'
 import PureRenderMixin from 'react-addons-pure-render-mixin'
-import Currency from "../currency/Currency";
 import Post from "../post/list/Post";
 import PostAdd from "../post/add/PostAdd";
 import PostEdit from "../post/edit/PostEdit";
+import Customer from "../customer/list/Customer";
+import CustomerAdd from "../customer/add/CustomerAdd";
+import CustomerEdit from "../customer/edit/CustomerEdit";
 import AdminManagerUser from "../adminManagerUser/AdminManagerUser";
 import AdminManagerUserGroup from "../AdminManagerUserGroup/AdminManagerUserGroup";
 import AdminNewArticle from "../adminNewArticle/AdminNewArticle";
-import NewCurrency from "../newCurrency/NewCurrency";
-import EditCurrency from "../editCurrency/EditCurrency";
 import AdminNewUserGroup from "../AdminNewUserGroup/AdminNewUserGroup";
 import AdminManagerTags from "../adminManagerTags/AdminManagerTags";
 import AdminManagerArticle from "../adminManagerArticle/AdminManagerArticle";
@@ -51,18 +51,20 @@ class Admin extends Component {
                                 <div className={style.contentContainer}>
                                     <Switch>
                                         <Route exact path={url} component={AdminIndex}/>
-										<Route path={`${url}/currency`} component={Currency}/>
 										<Route path={`${url}/post`} component={Post}/>
 										<Route path={`${url}/post_add`} component={PostAdd}/>
 										<Route path={`${url}/post_edit`} component={PostEdit}/>
+										
+										<Route path={`${url}/customer`} component={Customer}/>
+										<Route path={`${url}/customer_add`} component={CustomerAdd}/>
+										<Route path={`${url}/customer_edit`} component={CustomerEdit}/>
+										
                                         <Route path={`${url}/managerUser`} component={AdminManagerUser}/>
 										<Route path={`${url}/newUserGroup`} component={AdminNewUserGroup}/>
 										<Route path={`${url}/managerUserGroup`} component={AdminManagerUserGroup}/>
                                         <Route path={`${url}/managerTags`} component={AdminManagerTags}/>
                                         <Route path={`${url}/newArticle`} component={AdminNewArticle}/>
-										<Route path={`${url}/newCurrency`} component={NewCurrency}/>
-										<Route path={`${url}/editCurrency`} component={EditCurrency}/>
-                                        <Route path={`${url}/managerArticle`} component={AdminManagerArticle}/>
+=                                        <Route path={`${url}/managerArticle`} component={AdminManagerArticle}/>
                                         <Route path={`${url}/managerComment`} component={AdminManagerComment}/>
                                         <Route path={`${url}/detail`} component={Detail}/>
                                         <Route component={NotFound}/>

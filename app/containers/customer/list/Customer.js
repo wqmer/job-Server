@@ -2,12 +2,11 @@ import React, {Component, PropTypes} from 'react'
 import PureRenderMixin from 'react-addons-pure-render-mixin'
 import {bindActionCreators} from 'redux'
 import {connect} from 'react-redux'
-import {actions} from '../../../reducers/customer'
+import {actions} from '../../../reducers/customer/customer'
 import {Table, Pagination} from 'antd';
 import {Divider, Tag} from 'antd';
 import {Row, Col} from 'antd';
 import {Button} from 'antd'
-
 import {CustomerCell} from './component/customerCell';
 import style from './style.css'
 

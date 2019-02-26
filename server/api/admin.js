@@ -21,9 +21,9 @@ router.use('/tags',require('./tags'));
 
 router.use('/article',require('./article'));
 
-router.use('/currency',require('./currency'));
-
 router.use('/post',require('./post'));
+
+router.use('/customer',require('./customer'));
 
 router.use('/usergroup',require('./userGroup'));
 

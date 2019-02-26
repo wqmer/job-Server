@@ -1,9 +1,9 @@
 import {take,call,put,select} from 'redux-saga/effects'
-import {get, customer} from '../fetch/fetch'
+import {get, post} from '../fetch/fetch'
 import {actionsTypes as IndexActionTypes} from '../reducers'
-import {actionTypes as CustomerTypes} from '../reducers/Customer'
-import {actionTypes as CustomerAddTypes} from '../reducers/CustomerAdd'
-import {actionTypes as CustomerEditypes} from '../reducers/CustomerEdit'
+import {actionTypes as CustomerTypes} from '../reducers/customer/Customer'
+import {actionTypes as CustomerAddTypes} from '../reducers/customer/CustomerAdd'
+import {actionTypes as CustomerEditypes} from '../reducers/customer/CustomerEdit'
 
 export function* getCustomerList(pageNum) {
     yield put({type: IndexActionTypes.FETCH_START});
@@ -40,7 +40,7 @@ export function* getCustomerListFlow() {
 export function* addCustomer(data) {
     yield put({type: IndexActionTypes.FETCH_START});
     try {
-        return yield call(customer, '/admin/customer/add_customer', data);
+        return yield call(post, '/admin/customer/add_customer', data);
     } catch (err) {
         yield put({type: IndexActionTypes.SET_MESSAGE, msgContent: '网络请求错误', msgType: 0});
     } finally {
@@ -56,6 +56,9 @@ export function* addCustomerFlow() {
         } else if (request.data.description === '') {
             yield put({type: IndexActionTypes.SET_MESSAGE, msgContent: '请输入描述', msgType: 0});
         } else {
+			
+			console.log(request.data);
+			
             let res = yield call(addCustomer, request.data);
             if (res) {
                 if (res.code === 0) {
@@ -79,7 +82,7 @@ export function* addCustomerFlow() {
 export function* updateCustomer(data) {
     yield put({type: IndexActionTypes.FETCH_START});
     try {
-        return yield call(customer, '/admin/customer/update_customer', data);
+        return yield call(post, '/admin/customer/update_customer', data);
     } catch (err) {
         yield put({type: IndexActionTypes.SET_MESSAGE, msgContent: '网络请求错误', msgType: 0});
     } finally {
