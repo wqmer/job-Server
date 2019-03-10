@@ -1,9 +1,9 @@
 import {take,call,put,select} from 'redux-saga/effects'
 import {get, post} from '../fetch/fetch'
 import {actionsTypes as IndexActionTypes} from '../reducers'
-import {actionTypes as PostTypes} from '../reducers/Post'
-import {actionTypes as PostAddTypes} from '../reducers/PostAdd'
-import {actionTypes as PostEditypes} from '../reducers/PostEdit'
+import {actionTypes as PostTypes} from '../reducers/post/post'
+import {actionTypes as PostAddTypes} from '../reducers/post/postAdd'
+import {actionTypes as PostEditypes} from '../reducers/post/postEdit'
 
 export function* getPostList(pageNum) {
     yield put({type: IndexActionTypes.FETCH_START});
@@ -55,9 +55,12 @@ export function* addPostFlow() {
             yield put({type: IndexActionTypes.SET_MESSAGE, msgContent: '请输入发布标题', msgType: 0});
         } else if (request.data.author === '') {
             yield put({type: IndexActionTypes.SET_MESSAGE, msgContent: '请输入发布作者', msgType: 0});
+        } else if (request.data.description === '') {
+            yield put({type: IndexActionTypes.SET_MESSAGE, msgContent: '请输入发布内容', msgType: 0});
         } else if (request.data.date_added === '') {
             yield put({type: IndexActionTypes.SET_MESSAGE, msgContent: '请输入发布时间', msgType: 0});
-        } else if (request.data.view_count === '') {
+        } 
+		else if (request.data.view_count === '') {
             yield put({type: IndexActionTypes.SET_MESSAGE, msgContent: '请输入发布阅读数量', msgType: 0});
         } else {
             let res = yield call(addPost, request.data);
@@ -98,6 +101,8 @@ export function* updatePostFlow() {
             yield put({type: IndexActionTypes.SET_MESSAGE, msgContent: '请输入发布标题', msgType: 0});
         } else if (request.data.author === '') {
             yield put({type: IndexActionTypes.SET_MESSAGE, msgContent: '请输入发布作者', msgType: 0});
+        } else if (request.data.author === '') {
+            yield put({type: IndexActionTypes.SET_MESSAGE, msgContent: '请输入发布内容', msgType: 0});
         } else if (request.data.date_added === '') {
             yield put({type: IndexActionTypes.SET_MESSAGE, msgContent: '请输入发布时间', msgType: 0});
         } else if (request.data.view_count === '') {
@@ -131,12 +136,14 @@ export function* getPostFlow() {
 			let id = res.data._id;
 			let title = res.data.title;
 			let author = res.data.author;
+			let description = res.data.description;
 			let dateAdded = res.data.dateAdded;
 			let viewCount = res.data.viewCount;
 
 			yield put({type:PostEditypes.SET_POST_ID, id});
 			yield put({type:PostEditypes.EDITING_TITLE, title});
 			yield put({type:PostEditypes.EDITING_AUTHOR, author});
+			yield put({type:PostEditypes.EDITING_DESCRIPTION, description});
 			yield put({type:PostEditypes.EDITING_DATE_ADDED, dateAdded});
 			yield put({type:PostEditypes.EDITING_VIEW_COUNT, viewCount}); 
         }

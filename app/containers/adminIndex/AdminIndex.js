@@ -14,7 +14,7 @@ class AdminIndex extends Component {
     render() {
         return(
             <div>
-                <h1 >Welcome to my blog</h1>
+                <h1 >欢迎找工必胜客后台</h1>
             </div>
         )
 

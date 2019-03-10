@@ -1,9 +1,9 @@
 import {take,call,put,select} from 'redux-saga/effects'
 import {get, post} from '../fetch/fetch'
 import {actionsTypes as IndexActionTypes} from '../reducers'
-import {actionTypes as CustomerTypes} from '../reducers/customer/Customer'
-import {actionTypes as CustomerAddTypes} from '../reducers/customer/CustomerAdd'
-import {actionTypes as CustomerEditypes} from '../reducers/customer/CustomerEdit'
+import {actionTypes as CustomerTypes} from '../reducers/customer/customer'
+import {actionTypes as CustomerAddTypes} from '../reducers/customer/customerAdd'
+import {actionTypes as CustomerEditypes} from '../reducers/customer/customerEdit'
 
 export function* getCustomerList(pageNum) {
     yield put({type: IndexActionTypes.FETCH_START});

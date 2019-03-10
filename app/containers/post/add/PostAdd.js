@@ -5,11 +5,12 @@ import {connect} from 'react-redux'
 import remark from 'remark'
 import reactRenderer from 'remark-react'
 import {Input, Select, Button, Modal} from 'antd';
-import {actions} from '../../../reducers/postAdd';
+import {actions} from '../../../reducers/post/postAdd';
 import dateFormat from 'dateformat'
 import style from './style.css'
 
-const {update_title, update_author, update_date_added, update_view_count, add_post} = actions;
+const {TextArea} = Input;
+const {update_title, update_author, update_description, update_date_added, update_view_count, add_post} = actions;
 
 class PostAdd extends Component {
     constructor(props) {
@@ -25,6 +26,10 @@ class PostAdd extends Component {
         this.props.updateAuthor(e.target.value)
     };
 	
+	descriptionOnChange(e) {
+        this.props.updateDescription(e.target.value)
+    };
+	
 	dateAddedOnChange(e) {
         this.props.updateDateAdded(e.target.value)
     };
@@ -37,6 +42,7 @@ class PostAdd extends Component {
         let postData = {};
         postData.title = this.props.title;
         postData.author = this.props.author;
+		postData.description = this.props.description;
 		postData.dateAdded = this.props.dateAdded;
         postData.viewCount = this.props.viewCount;
 		
@@ -62,6 +68,13 @@ class PostAdd extends Component {
                         type='text'
                         value={this.props.author}
                         onChange={this.authorOnChange.bind(this)} />
+					<span className={style.subTitle}>内容</span>
+					<TextArea
+                        className={style.titleInput}
+                        placeholder={'请输入内容'}
+                        rows={6}
+                        value={this.props.description}
+                        onChange={this.descriptionOnChange.bind(this)} />	
 					<span className={style.subTitle}>添加日期</span>
                     <Input
                         className={style.titleInput}
@@ -90,6 +103,7 @@ class PostAdd extends Component {
 PostAdd.propsTypes = {
     title: PropTypes.string,
     author: PropTypes.string,
+	description: PropTypes.date,
 	dateAdded: PropTypes.string,
     viewCount: PropTypes.number
 };
@@ -97,16 +111,18 @@ PostAdd.propsTypes = {
 PostAdd.defaultProps = {
     title: '',
     author: '',
+	description: '',
 	dateAdded: '',
 	viewCount: 0
 };
 
 function mapStateToProps(state) {
-    const {title, author, dateAdded, viewCount} = state.admin.postAdd;
+    const {title, author, description, dateAdded, viewCount} = state.admin.postAdd;
     
     return {
         title,
         author,
+		description,
 		dateAdded,
 		viewCount
     }
@@ -116,6 +132,7 @@ function mapDispatchToProps(dispatch) {
     return {
         updateTitle: bindActionCreators(update_title, dispatch),
         updateAuthor: bindActionCreators(update_author, dispatch),
+		updateDescription: bindActionCreators(update_description, dispatch),
         updateDateAdded: bindActionCreators(update_date_added, dispatch),
         updateViewCount: bindActionCreators(update_view_count, dispatch),
         addPost: bindActionCreators(add_post, dispatch)

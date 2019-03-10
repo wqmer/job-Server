@@ -11,13 +11,10 @@ import Banner from "../components/banner/Banner";
 import Menus from "../components/menu/Menus";
 import NotFound from "../../components/notFound/NotFound";
 import {bindActionCreators} from 'redux'
-import {actions} from '../../reducers/adminManagerTags'
 import {actions as FrontActinos} from '../../reducers/frontReducer'
 import Login from "../home/components/login/Login";
 import {Logined} from "../home/components/logined/Logined";
 import {actions as IndexActions} from '../../reducers/index'
-const {get_all_tags} = actions;
-const {get_article_list} = FrontActinos;
 
 class Front extends Component{
     constructor(props){
@@ -31,7 +28,6 @@ class Front extends Component{
             <div>
                 <div>
                     <Banner/>
-                    <Menus getArticleList={(tag)=>this.props.get_article_list(tag,1)} categories={this.props.categories} history={this.props.history}/>
                 </div>
                 <div className={style.container}>
                     <div className={style.contentContainer}>
@@ -39,7 +35,6 @@ class Front extends Component{
                             <Switch>
                                 <Route exact path={url} component={Home}/>
                                 <Route path={`/detail/:id`} component={Detail}/>
-                                <Route path={`/:tag`} component={Home}/>
                                 <Route component={NotFound}/>
                             </Switch>
                         </div>
@@ -55,7 +50,6 @@ class Front extends Component{
     }
 
     componentDidMount() {
-        this.props.get_all_tags();
     }
 }
 
@@ -75,8 +69,6 @@ function mapStateToProps(state) {
 }
 function mapDispatchToProps(dispatch) {
     return{
-        get_all_tags:bindActionCreators(get_all_tags,dispatch),
-        get_article_list:bindActionCreators(get_article_list,dispatch),
         login: bindActionCreators(IndexActions.get_login, dispatch),
         register: bindActionCreators(IndexActions.get_register, dispatch)
     }

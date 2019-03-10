@@ -6,10 +6,11 @@ import style from './style.css'
 import remark from 'remark'
 import reactRenderer from 'remark-react'
 import {Input, Select, Button, Modal} from 'antd';
-import {actions} from '../../../reducers/postEdit';
+import {actions} from '../../../reducers/post/postEdit';
 import dateFormat from 'dateformat'
 
-const {edit_title, edit_author, edit_date_added, edit_view_count, update_post} = actions;
+const {TextArea} = Input;
+const {update_title, update_author, update_description, update_date_added, update_view_count, update_post} = actions;
 
 class PostEdit extends Component {
     constructor(props) {
@@ -18,19 +19,23 @@ class PostEdit extends Component {
     }
 
     titleOnChange(e) {
-        this.props.editTitle(e.target.value)
+        this.props.updateTitle(e.target.value)
     };
 	
 	authorOnChange(e) {
-        this.props.editAuthor(e.target.value)
+        this.props.updateAuthor(e.target.value)
+    };
+	
+	descriptionOnChange(e) {
+        this.props.updateDescription(e.target.value)
     };
 	
 	dateAddedOnChange(e) {
-        this.props.editDateAdded(e.target.value)
+        this.props.updateDateAdded(e.target.value)
     };
 	
 	viewCountOnChange(e) {
-        this.props.editViewCount(e.target.value)
+        this.props.updateViewCount(e.target.value)
     };
 
     updatePost() {
@@ -38,6 +43,7 @@ class PostEdit extends Component {
 	    postData.id = this.props.id;
         postData.title = this.props.title;
         postData.author = this.props.author;
+		postData.description = this.props.description;
 		postData.dateAdded = this.props.dateAdded;
         postData.viewCount = this.props.viewCount;
 		
@@ -63,6 +69,13 @@ class PostEdit extends Component {
                         type='text'
                         value={this.props.author}
                         onChange={this.authorOnChange.bind(this)} />
+					<span className={style.subTitle}>内容</span>
+					<TextArea
+                        className={style.titleInput}
+                        placeholder={'请输入内容'}
+                        rows={6}
+                        value={this.props.description}
+                        onChange={this.descriptionOnChange.bind(this)} />							
 					<span className={style.subTitle}>添加日期</span>
                     <Input
                         className={style.titleInput}
@@ -92,7 +105,8 @@ PostEdit.propsTypes = {
 	id: PropTypes.string,
     title: PropTypes.string,
     author: PropTypes.string,
-	dateAdded: PropTypes.string,
+	description: PropTypes.string,
+	dateAdded: PropTypes.date,
     viewCount: PropTypes.number
 };
 
@@ -100,17 +114,19 @@ PostEdit.defaultProps = {
 	id: '',
 	title: '',
     author: '',
+	description: '',
 	dateAdded: '',
 	viewCount: 0
 };
 
 function mapStateToProps(state) {
-    const {id, title, author, dateAdded, viewCount} = state.admin.postEdit;
+    const {id, title, author, description, dateAdded, viewCount} = state.admin.postEdit;
     
     return {
 		id,
 		title,
         author,
+		description,
 		dateAdded,
 		viewCount
     }
@@ -118,10 +134,11 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
     return {
-        editTitle: bindActionCreators(edit_title, dispatch),
-        editAuthor: bindActionCreators(edit_author, dispatch),
-        editDateAdded: bindActionCreators(edit_date_added, dispatch),
-        editViewCount: bindActionCreators(edit_view_count, dispatch),
+        updateTitle: bindActionCreators(update_title, dispatch),
+        updateAuthor: bindActionCreators(update_author, dispatch),
+		updateDescription: bindActionCreators(update_description, dispatch),
+        updateDateAdded: bindActionCreators(update_date_added, dispatch),
+		updateViewCount: bindActionCreators(update_view_count, dispatch),
         updatePost: bindActionCreators(update_post, dispatch)
     }
 }

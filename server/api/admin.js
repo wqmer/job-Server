@@ -23,6 +23,10 @@ router.use('/article',require('./article'));
 
 router.use('/post',require('./post'));
 
+router.use('/category',require('./category'));
+
+router.use('/customer',require('./customer'));
+
 router.use('/customer',require('./customer'));
 
 router.use('/usergroup',require('./userGroup'));

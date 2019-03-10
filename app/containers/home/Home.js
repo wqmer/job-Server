@@ -21,10 +21,7 @@ class Home extends Component {
         const {tags} = this.props;
         localStorage.setItem('userInfo', JSON.stringify(this.props.userInfo));
         return (
-            tags.length > 1 && this.props.match.params.tag && (tags.indexOf(this.props.match.params.tag) === -1 || this.props.location.pathname.lastIndexOf('\/') > 0)
-                ?
-                <Redirect to='/404'/>
-                :
+          
                 <div className={style.container}>
                     <ArticleList
                         history={this.props.history}

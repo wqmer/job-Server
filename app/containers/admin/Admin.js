@@ -19,13 +19,14 @@ import PostEdit from "../post/edit/PostEdit";
 import Customer from "../customer/list/Customer";
 import CustomerAdd from "../customer/add/CustomerAdd";
 import CustomerEdit from "../customer/edit/CustomerEdit";
+import AdminLogin from "../adminLogin/AdminLogin";
 import AdminManagerUser from "../adminManagerUser/AdminManagerUser";
-import AdminManagerUserGroup from "../AdminManagerUserGroup/AdminManagerUserGroup";
-import AdminNewArticle from "../adminNewArticle/AdminNewArticle";
 import AdminNewUserGroup from "../AdminNewUserGroup/AdminNewUserGroup";
-import AdminManagerTags from "../adminManagerTags/AdminManagerTags";
-import AdminManagerArticle from "../adminManagerArticle/AdminManagerArticle";
-import AdminManagerComment from "../adminManagerComment/AdminManagerComment";
+import AdminManagerUserGroup from "../AdminManagerUserGroup/AdminManagerUserGroup";
+
+import listCategory from "../category/list/category"
+import addCategory from "../category/add/CategoryAdd"
+
 
 const {change_location_admin} = actions;
 
@@ -55,6 +56,9 @@ class Admin extends Component {
 										<Route path={`${url}/post_add`} component={PostAdd}/>
 										<Route path={`${url}/post_edit`} component={PostEdit}/>
 										
+										<Route path={`${url}/category`} component={listCategory}/>
+                                        <Route path={`${url}/category_add`} component={addCategory}/>
+										
 										<Route path={`${url}/customer`} component={Customer}/>
 										<Route path={`${url}/customer_add`} component={CustomerAdd}/>
 										<Route path={`${url}/customer_edit`} component={CustomerEdit}/>
@@ -62,10 +66,6 @@ class Admin extends Component {
                                         <Route path={`${url}/managerUser`} component={AdminManagerUser}/>
 										<Route path={`${url}/newUserGroup`} component={AdminNewUserGroup}/>
 										<Route path={`${url}/managerUserGroup`} component={AdminManagerUserGroup}/>
-                                        <Route path={`${url}/managerTags`} component={AdminManagerTags}/>
-                                        <Route path={`${url}/newArticle`} component={AdminNewArticle}/>
-=                                        <Route path={`${url}/managerArticle`} component={AdminManagerArticle}/>
-                                        <Route path={`${url}/managerComment`} component={AdminManagerComment}/>
                                         <Route path={`${url}/detail`} component={Detail}/>
                                         <Route component={NotFound}/>
                                     </Switch>
@@ -76,7 +76,7 @@ class Admin extends Component {
                 </div>
             )
         }else{
-            return <NotFound/>
+            return <AdminLogin/>
         }
     }
     componentWillReceiveProps() {

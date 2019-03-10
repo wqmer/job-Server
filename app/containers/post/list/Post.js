@@ -2,7 +2,7 @@ import React, {Component, PropTypes} from 'react'
 import PureRenderMixin from 'react-addons-pure-render-mixin'
 import {bindActionCreators} from 'redux'
 import {connect} from 'react-redux'
-import {actions} from '../../../reducers/post'
+import {actions} from '../../../reducers/post/post'
 import {Table, Pagination} from 'antd';
 import {Divider, Tag} from 'antd';
 import {Row, Col} from 'antd';

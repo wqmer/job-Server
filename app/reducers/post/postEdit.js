@@ -3,6 +3,7 @@ const initialState={
 	id:'',
 	title:'',
     author:'',
+	description:'',
 	dateAdded:'',
     viewCount: 0
 };
@@ -11,31 +12,38 @@ export const actionTypes = {
 	SET_POST_ID:'SET_POST_ID',
     EDITING_TITLE:'EDITING_TITLE',
     EDITING_AUTHOR:'EDITING_AUTHOR',
+	EDITING_DESCRIPTION:'EDITING_DESCRIPTION',
     EDITING_DATE_ADDED:'EDITING_DATE_ADDED',
     EDITING_VIEW_COUNT:'EDITING_VIEW_COUNT',
 	UPDATE_POST:'UPDATE_POST'
 };
 
 export const actions = {
-    edit_title:function (title) {
+    update_title:function (title) {
         return{
             type:actionTypes.EDITING_TITLE,
             title
         }
     },
-    edit_author:function (author) {
+	update_author:function (author) {
         return{
             type:actionTypes.EDITING_AUTHOR,
             author
         }
     },
-	edit_date_added:function (dateAdded) {
+	update_description:function (description) {
+        return{
+            type:actionTypes.EDITING_DESCRIPTION,
+            description
+        }
+    },
+	update_date_added:function (dateAdded) {
         return{
             type:actionTypes.EDITING_DATE_ADDED,
             dateAdded
         }
     },
-	edit_view_count:function (viewCount) {
+	update_view_count:function (viewCount) {
         return{
             type:actionTypes.EDITING_VIEW_COUNT,
             viewCount
@@ -62,6 +70,10 @@ export function reducer(state = initialState, action) {
         case actionTypes.EDITING_AUTHOR:
             return{
                 ...state,author:action.author
+            };
+		case actionTypes.EDITING_DESCRIPTION:
+            return{
+                ...state,description:action.description
             };
 		case actionTypes.EDITING_DATE_ADDED:
             return{

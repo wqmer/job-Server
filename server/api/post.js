@@ -16,7 +16,7 @@ router.get('/get_posts', function (req, res) {
     Post.count(searchCondition)
         .then(count => {
             responseData.total = count;
-            Post.find(searchCondition, '_id title author dateAdded viewCount', {
+            Post.find(searchCondition, '_id title author description dateAdded viewCount', {
                 skip: skip,
                 limit: 5
             })
@@ -43,6 +43,7 @@ router.post('/add_post', function (req, res) {
     const {
         title,
         author,
+		description,
 		dateAdded,
         viewCount
     } = req.body;
@@ -50,6 +51,7 @@ router.post('/add_post', function (req, res) {
     let tempPost = new Post({
         title,
         author,
+		description,
 		dateAdded,
         viewCount
     });
@@ -67,11 +69,12 @@ router.post('/update_post',(req,res)=>{
 		id,
         title,
         author,
+		description,
 		dateAdded,
         viewCount
     } = req.body;
 	
-    Post.update({_id:id},{title, author, dateAdded, viewCount})
+    Post.update({_id:id},{title, author, description, dateAdded, viewCount})
         .then(result=>{
             console.log(result);
             responseClient(res,200,0,'更新成功',result)

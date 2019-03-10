@@ -1,12 +1,12 @@
 import {put, take, call, select} from 'redux-saga/effects'
 import {get, post} from '../fetch/fetch'
 import {actionsTypes as IndexActionTypes} from '../reducers'
-import {actionTypes as ManagerTagsTypes} from '../reducers/adminManagerTags'
+import {actionTypes as ManagerCategorysTypes} from '../reducers/category/manageCategory'
 
-export function* getAllTags() {
+export function* getAllCategorys() {
     yield put({type: IndexActionTypes.FETCH_START});
     try {
-        return yield call(get, '/getAllTags');
+        return yield call(get, '/admin/category/getCategorys');
     } catch (err) {
         yield put({type: IndexActionTypes.SET_MESSAGE, msgContent: '网络请求错误', msgType: 0});
     } finally {
@@ -14,10 +14,11 @@ export function* getAllTags() {
     }
 }
 
-export function* addTag(name) {
+export function* addCategory(Name) {
     yield put({type: IndexActionTypes.FETCH_START});
+		
     try {
-        return yield call(post, '/admin/tags/addTag', {name});
+        return yield call(post, '/admin/category/addCategory', {Name});
     } catch (err) {
         yield put({type: IndexActionTypes.SET_MESSAGE, msgContent: '网络请求错误', msgType: 0});
     } finally {
@@ -25,10 +26,10 @@ export function* addTag(name) {
     }
 }
 
-export function* delTag(name) {
+export function* delCategory(_id) {
     yield put({type: IndexActionTypes.FETCH_START});
     try {
-        return yield call(get, `/admin/tags/delTag?name=${name}`);
+        return yield call(get, `/admin/category/delCategory?_id=${_id}`);
     } catch (err) {
         yield put({type: IndexActionTypes.SET_MESSAGE, msgContent: '网络请求错误', msgType: 0});
     } finally {
@@ -36,16 +37,17 @@ export function* delTag(name) {
     }
 }
 
-export function* getAllTagsFlow() {
+export function* getAllCategorysFlow() {
     while (true) {
-        yield take(ManagerTagsTypes.GET_ALL_TAGS);
-        let res = yield call(getAllTags);
+        yield take(ManagerCategorysTypes.GET_CATEGORYS);
+        let res = yield call(getAllCategorys);
         if (res.code === 0) {
+            // console.log(res.data.list[0].Name)
             let tempArr = [];
-            for (let i = 0; i < res.data.length; i++) {
-                tempArr.push(res.data[i].name)
+            for (let i = 0; i < res.data.list.length; i++) {
+                tempArr.push(res.data.list[i])
             }
-            yield put({type: ManagerTagsTypes.SET_TAGS, data: tempArr});
+            yield put({type: ManagerCategorysTypes.SET_CATEGORYS, data: tempArr});
         } else if (res.message === '身份信息已过期，请重新登录') {
             yield put({type: IndexActionTypes.SET_MESSAGE, msgContent: res.message, msgType: 1});
             setTimeout(function () {
@@ -57,13 +59,13 @@ export function* getAllTagsFlow() {
     }
 }
 
-export function* delTagFlow() {
+export function* delCategoryFlow() {
     while (true){
-        let req = yield take(ManagerTagsTypes.DELETE_TAG);
-        let res = yield call(delTag,req.name);
+        let req = yield take(ManagerCategorysTypes.DELETE_CATEGORY);
+        let res = yield call(delCategory,req.name);
         if (res.code === 0) {
             yield put({type: IndexActionTypes.SET_MESSAGE, msgContent: res.message, msgType: 1});
-            yield put({type:ManagerTagsTypes.GET_ALL_TAGS});
+            yield put({type:ManagerCategorysTypes.GET_CATEGORYS});
         } else if (res.message === '身份信息已过期，请重新登录') {
             yield put({type: IndexActionTypes.SET_MESSAGE, msgContent: res.message, msgType: 0});
             setTimeout(function () {
@@ -75,13 +77,17 @@ export function* delTagFlow() {
     }
 }
 
-export function* addTagFlow() {
+export function* addCategoryFlow() {
     while (true) {
-        let req = yield take(ManagerTagsTypes.ADD_TAG);
-        let res = yield call(addTag, req.name);
+        let req = yield take(ManagerCategorysTypes.ADD_CATEGORY);
+        console.log(req)
+        let res = yield call(addCategory, req.name);
         if (res.code === 0) {
             yield put({type: IndexActionTypes.SET_MESSAGE, msgContent: res.message, msgType: 1});
-            yield put({type:ManagerTagsTypes.GET_ALL_TAGS});
+            yield put({type:ManagerCategorysTypes.GET_CATEGORYS});
+            setTimeout(function () {
+                location.replace('/admin/category');
+            }, 1000);
         }else if (res.message === '身份信息已过期，请重新登录') {
             yield put({type: IndexActionTypes.SET_MESSAGE, msgContent: res.message, msgType: 0});
             setTimeout(function () {
