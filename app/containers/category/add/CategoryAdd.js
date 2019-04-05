@@ -62,16 +62,13 @@ class CategoryAdd extends Component {
               message.success('添加成功');
               setTimeout(function () {
                 location.replace('/admin/category');
-            }, 1000);
+            }, 1000)
             },
             error: (result) => {
               message.error('添加失败.');
             },
           });
 
-    
-
- 
     };
 
     // onChange = (info) => { 
