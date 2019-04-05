@@ -6,7 +6,8 @@ export const actionTypes = {
     GET_CATEGORYS: 'GET_CATEGORYS',
     EDIT_CATEGORY: "EDIT_CATEGORY",
     DELETE_CATEGORY: "DELETE_CATEGORY",
-    ADD_CATEGORY :'ADD_CATEGORY'
+    ADD_CATEGORY :'ADD_CATEGORY',
+    UPLOAD_CATEGORY_IMAGE:'UPLOAD_CATEGORY_IMAGE'
 };
 
 export const actions = {
@@ -29,10 +30,18 @@ export const actions = {
         }
     },
 
-    add_category:function (name) {		
+    add_category:function (name , url) {		
         return{
             type: actionTypes.ADD_CATEGORY,
-            name
+            name,
+            url
+        }
+    },
+    upload_category_image:function (name ,file) {		
+        return{
+            type: actionTypes.UPLOAD_CATEGORY_IMAGE,
+            name,
+            file
         }
     }
 };

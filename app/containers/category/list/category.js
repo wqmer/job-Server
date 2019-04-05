@@ -29,13 +29,26 @@ class Category extends Component {
 			title:'名称',
 			dataIndex:'Name',
 			key:'Name',
-			width: 500
+			width: 1000
+		}, 
+
+		{
+			title:'图标',
+			dataIndex:'ImageUrl',
+			key:'ImageUrl',
+			width: 1000,
+			alien: 'center',
+			render: (record) => (	
+				// console.log(record)
+				<img src = {record} height="45" width="45" />
+			)
+
 		}, 
 
 		{
 			title: '操作',
 			key: 'action',
-			width: 100,
+			width: 500,
 			render: (text, record) => (	
 				<PostCell
 					// getPost={(id)=>this.props.getPost(record._id)}		
@@ -53,15 +66,15 @@ class Category extends Component {
 			    <Col span={12}><h2>分类管理</h2></Col>
 			    <Col span={12}><Button type="primary" icon="plus" className={style.btnAdd} onClick={()=>{this.props.history.push('/admin/category_add')}}/></Col>
 			  </Row>
-			  <Table columns={columns} dataSource={this.props.category} />
+			  <Table  columns={columns} dataSource={this.props.category} />
             </div>
         )
     }
 
     componentDidMount() {
-        // if(this.props.postList.length === 0)
+        if(this.props.category.length === 0)
             this.props.get_categorys();
-            // console.log(this.props)
+        // console.log(this.props)
     }
 }
 
