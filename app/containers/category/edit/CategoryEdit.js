@@ -139,7 +139,7 @@ class CategoryAdd extends Component {
                         // value = {this.props.name}
                         onChange={this.onChangeInput} 
                         />
-                    <img src = {this.props.url} height="45" width="45" />
+                    <img src = {'https://s3-us-west-1.amazonaws.com/job-upload-imge/' + this.props.url} height="45" width="45" />
                      <span className={style.subTitle}>当前图标</span>
                    
               

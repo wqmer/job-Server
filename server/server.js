@@ -21,7 +21,7 @@ app.use('/',Express.static(path.join(__dirname,"..",'static')));
 
 // const targetUrl = `http://${config.apiHost}:${config.apiPort}`;
 
-// const targetUrl = `http://localhost:3030/`;
+// const targetUxrl = `http://localhost:3030/`;
 const targetUrl = 'https://job-api-server.herokuapp.com/'
 const proxy = httpProxy.createProxyServer({
     target:targetUrl,

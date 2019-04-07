@@ -40,7 +40,7 @@ class Category extends Component {
 			alien: 'center',
 			render: (record) => (	
 				// console.log(record)
-				<img src = {record} height="45" width="45" />
+				<img src = {'https://s3-us-west-1.amazonaws.com/job-upload-imge/' + record} height="45" width="45" />
 			)
 
 		}, 
