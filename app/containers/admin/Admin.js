@@ -27,6 +27,7 @@ import {Loading} from "../components/loading/Loading"
 
 import listCategory from "../category/list/category"
 import addCategory from "../category/add/CategoryAdd"
+import editCategory from "../category/edit/CategoryEdit"
 
 
 const {change_location_admin} = actions;
@@ -61,6 +62,7 @@ class Admin extends Component {
 										
 										<Route path={`${url}/category`} component={listCategory}/>
                                         <Route path={`${url}/category_add`} component={addCategory}/>
+                                        <Route path={`${url}/category_edit`} component={editCategory}/>
 										
 										<Route path={`${url}/customer`} component={Customer}/>
 										<Route path={`${url}/customer_add`} component={CustomerAdd}/>

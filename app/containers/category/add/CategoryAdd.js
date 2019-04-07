@@ -99,12 +99,6 @@ class CategoryAdd extends Component {
             fileList: [file],
           }));
         };
-
-
-
-        // let fileList = []
-        // fileList.push(file)
-        // this.setState({ fileList });
         return false;
       }
 
@@ -113,7 +107,6 @@ class CategoryAdd extends Component {
     //   }
 
     render() {
-        // const { getFieldDecorator } = this.props.form;
         const props = {
             // action: '/api/admin/category/upload_image',
             listType: 'picture',
@@ -130,32 +123,6 @@ class CategoryAdd extends Component {
           };
       
         return (
-         
-
-        //     <Form onSubmit={this.handleSubmit} >
-        //     <Form.Item>
-        //       {getFieldDecorator('name', {
-        //         rules: [{ required: true, message: '请输入名称!' }],
-        //       })(
-        //         <Input   value={this.state.Name}
-        //                 onChange={this.onChangeInput} 
-        //                 prefix={<Icon />} placeholder="请输入分类名称" />
-        //       )}
-        //     </Form.Item>   
-
-        //     <Form.Item>
-        //         <Upload {...props} fileList={this.state.fileList}>
-        //            <Button>
-        //              <Icon type="upload" /> 请上传分类图片
-        //            </Button>
-        //           </Upload>
-    
-        //     </Form.Item>   
-        //   </Form>
-
-
-
-
             <div>
                 <h2>添加分类</h2>
                 <div className={style.container}>

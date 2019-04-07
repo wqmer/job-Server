@@ -11,7 +11,7 @@ import {Button} from 'antd'
 import {PostCell} from './component/postCell';
 import style from './style.css'
 
-const {get_categorys, delete_category} = actions;
+const {get_categorys, delete_category, get_category} = actions;
 
 class Category extends Component {
 
@@ -52,9 +52,12 @@ class Category extends Component {
 			render: (text, record) => (	
 				<PostCell
 					// getPost={(id)=>this.props.getPost(record._id)}		
-					delete = {(id) => {
+					delete = {() => {
 						this.props.delete_category(record._id); 
-						}}					
+						}}	
+					getCategory = {() => {
+						this.props.get_category(record._id)
+					}}			
 					history= {this.props.history}
 					data={record} />
 			)
@@ -66,7 +69,7 @@ class Category extends Component {
 			    <Col span={12}><h2>分类管理</h2></Col>
 			    <Col span={12}><Button type="primary" icon="plus" className={style.btnAdd} onClick={()=>{this.props.history.push('/admin/category_add')}}/></Col>
 			  </Row>
-			  <Table  columns={columns} dataSource={this.props.category} />
+			  <Table pagination = {true} columns={columns} dataSource={this.props.category} />
             </div>
         )
     }
@@ -79,6 +82,7 @@ class Category extends Component {
 }
 
 
+
 function mapStateToProps(state) {
     return{
            category:state.admin.category
@@ -88,7 +92,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
     return {
         get_categorys: bindActionCreators(get_categorys, dispatch),
-		// getPost: bindActionCreators(get_post, dispatch),
+		get_category: bindActionCreators(get_category, dispatch),
 		delete_category: bindActionCreators(delete_category, dispatch),
     }
 }

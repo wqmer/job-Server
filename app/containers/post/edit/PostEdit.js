@@ -65,10 +65,9 @@ class PostEdit extends Component {
 
     render() {
         // console.log(this.props.title)
-
         // console.log(target.length == 0 ? undefined : target[0]._id)
-        console.log(this.props._category_id)
-        console.log(this.props.category)
+        // console.log(this.props._category_id)
+        // console.log(this.props.category)
         return (
             <div>
                 <h2>编辑发布</h2>
