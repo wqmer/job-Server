@@ -19,10 +19,11 @@ export const actions = {
             pageNum
         }
     },
-    delete_category: function (name) {
+    delete_category: function (id,ImageUrl) {
         return {
             type: actionTypes.DELETE_CATEGORY,
-            name
+            id,
+            ImageUrl
         }
     },
     edit_category: function (name) {

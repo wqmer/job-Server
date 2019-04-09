@@ -53,7 +53,8 @@ class Category extends Component {
 				<PostCell
 					// getPost={(id)=>this.props.getPost(record._id)}		
 					delete = {() => {
-						this.props.delete_category(record._id); 
+						console.log(record)
+						this.props.delete_category(record._id , record.ImageUrl); 
 						}}	
 					getCategory = {() => {
 						this.props.get_category(record._id)

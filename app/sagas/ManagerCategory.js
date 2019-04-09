@@ -29,10 +29,10 @@ export function* addCategory(Name,url) {
     }
 }
 
-export function* delCategory(_id) {
+export function* delCategory(_id, ImageUrl) {
     yield put({type: IndexActionTypes.FETCH_START});
     try {
-        return yield call(get, `/admin/category/delete_category?_id=${_id}`);
+        return yield call(get, `/admin/category/delete_category?_id=${_id}&ImageUrl=${ImageUrl}`);
     } catch (err) {
         yield put({type: IndexActionTypes.SET_MESSAGE, msgContent: '网络请求错误', msgType: 0});
     } finally {
@@ -65,7 +65,8 @@ export function* getAllCategorysFlow() {
 export function* delCategoryFlow() {
     while (true){
         let req = yield take(ManagerCategorysTypes.DELETE_CATEGORY);
-        let res = yield call(delCategory,req.name);
+        console.log(req)
+        let res = yield call(delCategory,req.id, req.ImageUrl);
         if (res.code === 0) {
             yield put({type: IndexActionTypes.SET_MESSAGE, msgContent: res.message, msgType: 1});
             yield put({type:ManagerCategorysTypes.GET_CATEGORYS});
